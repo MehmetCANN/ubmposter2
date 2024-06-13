@@ -17,16 +17,16 @@
     <script type="text/javascript">
         var Info = {
             width: 400,
-            height: 900,
+            height: 600,
             debug: false,
             color: "white",
-            addSelectionOptions: true,
+            addSelectionOptions: false,
             use: "HTML5",
             j2sPath: "https://chemapps.stolaf.edu/jmol/jsmol/j2s",
             script: "load 'protein.pdb'; color bfactor;",
             readyFunction: null,
             disableJ2SLoadMonitor: true,
-            disableInitialConsole: true
+            disableInitialConsole: false
         };
         Jmol.getApplet("jsmolApplet", Info);
         document.getElementById("jsmol").innerHTML = Jmol.getAppletHtml("jsmolApplet");
