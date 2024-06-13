@@ -19,17 +19,25 @@
                 },
                 structure: {
                     showAxes: true,
-                    showCartoon: true,
+                    // Set cartoon representation to true
+                    representation: {
+                        polymer: {
+                            cartoon: {
+                                style: 'spline', // You can adjust the style here
+                                color: 'spectrum', // Color by spectrum
+                                colorParams: { value: 'bfactor' } // Color by B-factor
+                            }
+                        }
+                    }
                 },
             });
 
             await viewer.loadStructureFromUrl('./protein.pdb');
-            viewer.plugin.managers.structure.component.applyTheme('polymer-id');
         });
     </script>
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; }
-        #app { width: 100%; max-width: 400px; height: 400px; margin: auto; }
+        #app { width: 100%; max-width: 800px; height: 600px; margin: auto; }
     </style>
 </head>
 <body>
