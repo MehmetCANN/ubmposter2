@@ -1,38 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protein Structure Visualization</title>
-    <!-- Load Mol* viewer library -->
-    <script type="module">
-        import { PluginContext } from 'https://unpkg.com/molstar/build/viewer/molstar.es.js';
+<script type="module">
+    import { PluginContext } from 'https://cdn.jsdelivr.net/npm/molstar@4.3.0/build/viewer/molstar.es.js';
 
-        window.addEventListener('load', async () => {
-            const viewer = new PluginContext();
-            await viewer.load();
+    window.addEventListener('load', async () => {
+        const viewer = new PluginContext();
+        await viewer.load();
 
-            // Initialize viewer
-            const target = document.getElementById('app');
-            viewer.create(target, { layoutIsExpanded: false });
+        // Initialize viewer
+        const target = document.getElementById('app');
+        viewer.create(target, { layoutIsExpanded: false });
 
-            // Load and visualize structure
-            const structure = await viewer.loadStructure('./protein.pdb');
-            viewer.structureComponent.add(structure);
-            viewer.representation.addRepresentation(structure, {
-                type: 'cartoon',
-                color: 'spectrum',
-                colorParams: { value: 'bfactor' }  // Color by B-factor
-            });
+        // Load and visualize structure
+        const structure = await viewer.loadStructure('./protein.pdb');
+        viewer.structureComponent.add(structure);
+        viewer.representation.addRepresentation(structure, {
+            type: 'cartoon',
+            color: 'spectrum',
+            colorParams: { value: 'bfactor' }  // Color by B-factor
         });
-    </script>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        #app { width: 100%; max-width: 800px; height: 600px; margin: auto; }
-    </style>
-</head>
-<body>
-    <h1>Protein Structure Visualization</h1>
-    <div id="app"></div>
-</body>
-</html>
+    });
+</script>
+
