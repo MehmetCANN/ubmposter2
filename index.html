@@ -4,35 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protein Structure Visualization</title>
+    <!-- Load Mol* viewer library -->
     <script type="module">
-        import { PluginContext, DefaultPluginSpec } from 'https://unpkg.com/molstar/build/viewer/molstar.js';
+        import { PluginContext } from 'https://unpkg.com/molstar/build/viewer/molstar.es.js';
 
         window.addEventListener('load', async () => {
-            const viewer = new PluginContext(DefaultPluginSpec());
-            viewer.init(document.getElementById('app'), {
-                layout: {
-                    initial: {
-                        isExpanded: false,
-                        showControls: true,
-                        controlsDisplay: 'inside',
-                    }
-                },
-                structure: {
-                    showAxes: true,
-                    // Set cartoon representation to true
-                    representation: {
-                        polymer: {
-                            cartoon: {
-                                style: 'spline', // You can adjust the style here
-                                color: 'spectrum', // Color by spectrum
-                                colorParams: { value: 'bfactor' } // Color by B-factor
-                            }
-                        }
-                    }
-                },
-            });
+            const viewer = new PluginContext();
+            await viewer.load();
 
-            await viewer.loadStructureFromUrl('./protein.pdb');
+            // Initialize viewer
+            const target = document.getElementById('app');
+            viewer.create(target, { layoutIsExpanded: false });
+
+            // Load and visualize structure
+            const structure = await viewer.loadStructure('./protein.pdb');
+            viewer.structureComponent.add(structure);
+            viewer.representation.addRepresentation(structure, {
+                type: 'cartoon',
+                color: 'spectrum',
+                colorParams: { value: 'bfactor' }  // Color by B-factor
+            });
         });
     </script>
     <style>
